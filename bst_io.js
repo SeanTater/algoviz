@@ -475,13 +475,13 @@ function animationInitBST(root) {
 //	ins_label.appendChild(txt_node);
 
 	ins_anim = svgDoc.createElementNS(svgNS,'animate');
-		ins_anim = setAttribute("id", 'ins_anim');
-		ins_anim = setAttribute("attributeName", "opacity");
-		ins_anim = setAttribute("attributeType", "CSS");
-		ins_anim = setAttribute("dur", "2s");
-		ins_anim = setAttribute("fill", "freeze");
-		ins_anim = setAttribute("from", "0.0");
-		ins_anim = setAttribute("to", "1.0");
+        ins_anim.setAttribute("id", 'ins_anim');
+        ins_anim.setAttribute("attributeName", "opacity");
+        ins_anim.setAttribute("attributeType", "CSS");
+        ins_anim.setAttribute("dur", "2s");
+        ins_anim.setAttribute("fill", "freeze");
+        ins_anim.setAttribute("from", "0.0");
+        ins_anim.setAttribute("to", "1.0");
 
 	ins_grp.appendChild(ins_line);
 	ins_grp.appendChild(ins_circ);
