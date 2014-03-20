@@ -2,7 +2,7 @@ Wiki = {
   /** Parse and setup wiki runner */
   init: function(text) {
     $("#logwindow").append("<br/>Collecting documents from wikipedia..<br/>");
-    Wiki.crawl_wikipedia(["Goose"], 5, function() {
+    Wiki.crawl_wikipedia([$("#center_article").val()], 5, function() {
       // When finished crawling wikipedia
       $("#logwindow").append("Finished collecting " + Articles.all.length + " documents.<br/>");
       setTimeout(function(){
@@ -121,4 +121,6 @@ Wiki = {
   }
 };
 
-$(Wiki.init);
+$(function(){
+  $("#get_histograms").click(Wiki.init);
+});

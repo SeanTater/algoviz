@@ -17,8 +17,10 @@
   </head>
   <body>
     <div id='controls'>
-      <input type="text" ng-model="center_article" placeholder="Enter a Wikipedia article title" />
-      <button>Get histograms!</button>
+      <form>
+        <input id="center_article" type="text" ng-model="center_article" placeholder="Enter a Wikipedia article title" />
+        <button id="get_histograms">Get histograms!</button>
+      </form>
     </div>
     <div>
       Common terms surrounding {{center_article}}
