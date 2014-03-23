@@ -16,21 +16,31 @@
     <link rel="stylesheet" href="wikiperf.css" type="text/css" />
   </head>
   <body>
-    <div id='controls'>
+    <header id='controls'>
       <form>
+        Find terms related to a Wikipedia article <br/>
         <input id="center_article" type="text" ng-model="center_article" placeholder="Enter a Wikipedia article title" />
-        <button id="get_histograms">Get histograms!</button>
+        <button id="get_histograms">Calculate</button>
       </form>
+    </header>
+    <div class="split_panels">
+      <div class="panel" id="articles">
+        {{center_article}}'s Article neighborhood
+        <table id="article_neighborhood">
+        </table>
+      </div>
+      <div class="panel" id='results'>
+        Common terms surrounding {{center_article}}
+        <table id='histogram'>
+        </table>
+      </div>
+      <div class="panel" id="performance">
+        <div id="time_chart" style="width:600px;height:300px;display:inline-block;"></div>
+        <div id="cost_chart" style="width:600px;height:300px;display:inline-block;"></div>
+      </div>
     </div>
-    <div>
-      Common terms surrounding {{center_article}}
-    </div>
-    <div id="charts">
-      <div id="time_chart" style="width:600px;height:300px;display:inline-block;"></div>
-      <div id="cost_chart" style="width:600px;height:300px;display:inline-block;"></div>
-    </div>
-    <div id="logwindow">
+    <footer id="logwindow">
       Starting up..
-    </div>
+    </footer>
   </body>
 </html>

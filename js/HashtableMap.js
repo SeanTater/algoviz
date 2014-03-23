@@ -1,11 +1,16 @@
-Hashtable = function() {
+HashtableMap = function() {
   // Create a new hash table that counts strings
   this.table = [];
   this.size = 16;
   this.entries = 0;
 }
 
-Hashtable.prototype.count = function(key, value) {
+  
+HashtableMap.prototype.populate =  function(tokens) {
+  tokens.forEach(this.count, this);
+};
+
+HashtableMap.prototype.count = function(key, value) {
   var hash = Math.abs(MurmurHash3.hashString(key, key.length, 0) | 0) % this.size;
   var entry = this.table[hash];
   value |= 1;
@@ -25,9 +30,9 @@ Hashtable.prototype.count = function(key, value) {
     
     if (this.entries > 0.75 * this.size) this.rehash();
   }
-}
+};
 
-Hashtable.prototype.rehash = function(){
+HashtableMap.prototype.rehash = function(){
   var old_table = this.table;
   var old_entries = this.entries;
   this.table = [];
@@ -40,4 +45,4 @@ Hashtable.prototype.rehash = function(){
       }
     }
   }, this);
-}
+};

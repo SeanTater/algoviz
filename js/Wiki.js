@@ -2,15 +2,15 @@ Wiki = {
   /** Parse and setup wiki runner */
   init: function(text) {
     $("#logwindow").append("<br/>Collecting documents from wikipedia..<br/>");
-    Wiki.crawl_wikipedia([$("#center_article").val()], 5, function() {
+    Wiki.crawl_wikipedia([$("#center_article").val()], 25, function() {
       // When finished crawling wikipedia
       $("#logwindow").append("Finished collecting " + Articles.all.length + " documents.<br/>");
       setTimeout(function(){
         Wiki.get_histograms([
-          new Stat("Builtin Object", Wiki.hist_builtin, 800, 51200),
-          new Stat("Unbalanced Binary Search Tree", Wiki.hist_bst, 800, 51200),
-          new Stat("Hashtable", Wiki.hist_hash, 800, 51200),
-          new Stat("Sorted Array", Wiki.hist_sorted_array, 800, 51200),
+          new Stat("Builtin Object", BuiltinMap, 800, 51200),
+          new Stat("Unbalanced Binary Search Tree", UnbalancedBSTMap, 800, 51200),
+          new Stat("Hashtable", HashtableMap, 800, 51200),
+          new Stat("Sorted Array", SortedArrayMap, 800, 51200),
         ]); // get_histograms()
       }, 0); // setTimeout()
     }); // crawl_wikipedia()
@@ -23,8 +23,12 @@ Wiki = {
     var next_names = [];
     Articles.fetch(names, function(article){ // for each article
       if (next_names.indexOf(article.title) < 0) {
+        // If that article isn't already scheduled for downloading
         next_names = next_names.concat(article.links);
       }
+      article.links.forEach(function(link){
+        $("#article_neighborhood").append(link+" ");
+      });
       limit--;
     }, function() { // at the end of the fetch
       if (limit > 0) { // Trigger the next level of the BFS
@@ -39,7 +43,7 @@ Wiki = {
 
 
   /** Rerun a performance test against a queue of datasets
-   * Each dataset is run 10 times and averaged
+   * Each dataset is run 3 times and averaged
    * If it has not met the size cap, it is doubled
    * If it has met the cap, it moves to the next entry or schedules for charts
    *   to be drawn.
@@ -50,10 +54,10 @@ Wiki = {
     // You can't index more tokens than you have
     e.count = Math.min(e.count, Articles.all_tokens.length);
     
-    // Run the performance tests 10 times
+    // Run the performance tests 3 times
     var run_time = new Date();
     for(var i=0; i<3; i++) {
-      e.benchmark( Articles.all_tokens.slice(0, e.count) );
+      new e.benchmark().populate( Articles.all_tokens.slice(0, e.count) );
     }
     run_time = (new Date() - run_time)/3;
     
@@ -81,44 +85,7 @@ Wiki = {
   finish: function() {
     Stats.init(Wiki._stats);
   },
-  
-  hist_builtin: function(tokens) {
-    // Use a builtin object
-    var hist = {};
-    tokens.forEach(function(token){
-      hist[token] = (hist[token] | 0) + 1;
-    })
-  },
-  
-  hist_bst: function(tokens) {
-    // Create a _unbalanced_ BST that takes 2-entry objects
-    var tree = new buckets.BSTree(function(t1, t2){
-      if (t1.token < t2.token) { return -1; }
-      else if (t1.token > t2.token) { return 1; }
-      else { return 0; }
-    });
-    
-    tokens.forEach(function(token){
-      var node = tree.searchNode(tree.root, token);
-      if (node == null) {
-        tree.add({token: token, count: 1});
-      } else {
-        node.count += 1;
-      }
-    })
-  },
-  
-  hist_hash: function(tokens) {
-    // Use a specialized hashtable
-    var ht = new Hashtable();
-    tokens.forEach(ht.count, ht);
-  },
-  
-  hist_sorted_array: function(tokens) {
-    // Use two parallel sorted arrays
-    var arr = new SortedArray();
-    tokens.forEach(arr.count, arr);
-  }
+
 };
 
 $(function(){

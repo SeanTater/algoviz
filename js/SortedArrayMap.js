@@ -1,10 +1,15 @@
-SortedArray = function() {
+SortedArrayMap = function() {
   // Create a new hash table that counts strings
   this.keys = [];
   this.values = [];
 }
 
-SortedArray.prototype.count = function(key) {
+  
+SortedArrayMap.prototype = function(tokens) {
+  tokens.forEach(this.count, this);
+};
+
+SortedArrayMap.prototype.count = function(key) {
   // >> implies integer, / implies double. We want an int.
   /**var index = entries.length >> 1;
   var step = cursor >> 1;
