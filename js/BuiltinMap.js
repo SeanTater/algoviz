@@ -5,8 +5,8 @@ function BuiltinMap() {
 
 BuiltinMap.prototype.populate = function(tokens) {
   tokens.forEach(function(token){
-    hist[token] = (this.hist[token] | 0) + 1;
-  })
+    this.hist[token] = (this.hist[token] | 0) + 1;
+  }, this)
 
   // TODO: This unfairly skews the results for builtin
   var entries = [];

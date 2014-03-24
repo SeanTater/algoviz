@@ -1,11 +1,11 @@
-SortedArrayMap = function() {
+function SortedArrayMap() {
   // Create a new hash table that counts strings
   this.keys = [];
   this.values = [];
 }
 
   
-SortedArrayMap.prototype = function(tokens) {
+SortedArrayMap.prototype.populate = function(tokens) {
   tokens.forEach(this.count, this);
 };
 

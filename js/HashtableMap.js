@@ -1,4 +1,4 @@
-HashtableMap = function() {
+function HashtableMap() {
   // Create a new hash table that counts strings
   this.table = [];
   this.size = 16;

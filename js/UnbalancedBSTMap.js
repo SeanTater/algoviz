@@ -9,7 +9,7 @@ function UnbalancedBSTMap() {
 
 UnbalancedBSTMap.prototype.populate = function(tokens) {
   tokens.forEach(function(token){
-    var node = tree.searchNode(this.tree.root, token);
+    var node = this.tree.searchNode(this.tree.root, token);
     if (node == null) {
       this.tree.add({token: token, count: 1});
     } else {
