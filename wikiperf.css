@@ -1,4 +1,12 @@
+#article_neighborhood {
+  max-width: 200px;
+  max-height: 800px;
+  font-size: 2pt;
+}
 
+.chart {
+    display: inline-block;
+}
 
 #controls {
   font-family: sans-serif;
@@ -8,28 +16,26 @@
   box-shadow: 2px 2px 3px gray, 0 0 3px white inset;
 }
 
-.split_panels {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: flow;
-  flex-direction: flow;
+#logwindow {
+  color: #555;
+  padding: 1em;
 }
 
 .panel {
   -webkit-flex: auto;
   flex: auto;
   padding: 1em;
+  margin: 1em;
 }
 
-#logwindow {
+.pane {
   background: #eee;
-  color: #555;
-  padding: 1em;
   box-shadow: 0 0 2px gray;
 }
 
-#article_neighborhood {
-  max-width: 200px;
-  max-height: 800px;
-  font-size: 2pt;
+.split_panels {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: flow;
+  flex-direction: flow;
 }

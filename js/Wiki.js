@@ -7,10 +7,10 @@ Wiki = {
       $("#logwindow").append("Finished collecting " + Articles.all.length + " documents.<br/>");
       setTimeout(function(){
         Wiki.get_histograms([
-          new Stat("Builtin Object", BuiltinMap, 800, 51200),
-          new Stat("Unbalanced Binary Search Tree", UnbalancedBSTMap, 800, 51200),
-          new Stat("Hashtable", HashtableMap, 800, 51200),
-          new Stat("Sorted Array", SortedArrayMap, 800, 51200),
+          new Stat("Builtin Object", new WallClockBenchmark(BuiltinMap), 800, 51200),
+          new Stat("Unbalanced Binary Search Tree", new WallClockBenchmark(UnbalancedBSTMap), 800, 51200),
+          new Stat("Hashtable", new WallClockBenchmark(HashtableMap), 800, 51200),
+          new Stat("Sorted Array", new WallClockBenchmark(SortedArrayMap), 800, 51200),
         ]); // get_histograms()
       }, 0); // setTimeout()
     }); // crawl_wikipedia()
@@ -27,7 +27,8 @@ Wiki = {
         next_names = next_names.concat(article.links);
       }
       article.links.forEach(function(link){
-        $("#article_neighborhood").append(link+" ");
+        if ($("#article_neighborhood").text().length < 10000)
+            $("#article_neighborhood").append(link+" ");
       });
       limit--;
     }, function() { // at the end of the fetch
@@ -54,12 +55,8 @@ Wiki = {
     // You can't index more tokens than you have
     e.count = Math.min(e.count, Articles.all_tokens.length);
     
-    // Run the performance tests 3 times
-    var run_time = new Date();
-    for(var i=0; i<3; i++) {
-      new e.benchmark().populate( Articles.all_tokens.slice(0, e.count) );
-    }
-    run_time = (new Date() - run_time)/3;
+    // Run the (possibly synthetic) benchmark
+    var run_time = e.benchmark.run(e.count);
     
     // Log the results
     $("#logwindow").append("["+e.name+":"+e.count+"]:"+ run_time + "ms<br />");

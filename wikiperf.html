@@ -12,6 +12,10 @@
     <script src="js/SortedArrayMap.js"></script>
     <script src="js/UnbalancedBSTMap.js"></script>
     <script src="js/BuiltinMap.js"></script>
+    
+    <script src="js/WallClockBenchmark.js"></script>
+    <script src="js/SyntheticBenchmark.js"></script>
+    
     <script src="js/Stat.js"></script>
     <script src="js/Article.js"></script>
     <script src="js/Wiki.js"></script>
@@ -26,22 +30,37 @@
       </form>
     </header>
     <div class="split_panels">
-      <div class="panel" id="articles">
-        {{center_article}}'s Article neighborhood
+      <div class="panel pane" id="articles">
+        <strong>Article Neighborhood</strong>
         <table id="article_neighborhood">
         </table>
       </div>
-      <div class="panel" id='results'>
+      <div class="panel pane" id='results'>
         Common terms surrounding {{center_article}}
         <table id='histogram'>
         </table>
       </div>
-      <div class="panel" id="performance">
-        <div id="time_chart" style="width:600px;height:300px;display:inline-block;"></div>
-        <div id="cost_chart" style="width:600px;height:300px;display:inline-block;"></div>
+      <div class="panel pane" id="performance">
+        <div id="time_chart" class='chart'></div>
+        <div id="cost_chart" class='chart'></div>
+      </div>
+      <div class="panel pane">
+        This framework is designed to help you visualize the performance of
+        various algorithms in a convenient setting.
+        <br />
+        The current setup fetches an article you choose from Wikipedia and
+        uses it and the articles it refers to recursively, to generate a
+        textual dataset. You can use datasets like these for many purposes,
+        such as:
+        <ul>
+            <li> For finding the relatedness of terms or phrases </li>
+        </ul>
+        <br />
+        If you find this project helpful, feel free to contribute on
+        <a href="http://github.com/SeanTater/autoperf">github</a>
       </div>
     </div>
-    <footer id="logwindow">
+    <footer id="logwindow" class="pane">
       Starting up..
     </footer>
   </body>
