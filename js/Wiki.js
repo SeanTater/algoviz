@@ -11,6 +11,9 @@ Wiki = {
           new Stat("Unbalanced Binary Search Tree", new WallClockBenchmark(UnbalancedBSTMap), 800, 51200),
           new Stat("Hashtable", new WallClockBenchmark(HashtableMap), 800, 51200),
           new Stat("Sorted Array", new WallClockBenchmark(SortedArrayMap), 800, 51200),
+          new Stat("n^2", new SyntheticBenchmark(function(n) {return 0.0000005 * n * n;}), 800, 51200),
+          new Stat("n log2 n", new SyntheticBenchmark(function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);}), 800, 51200),
+          new Stat("n", new SyntheticBenchmark(function(n) {return 0.0005 * n;}), 800, 51200),
         ]); // get_histograms()
       }, 0); // setTimeout()
     }); // crawl_wikipedia()
