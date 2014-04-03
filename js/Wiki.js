@@ -2,21 +2,7 @@ Wiki = {
   /** Parse and setup wiki runner */
   init: function(text) {
     $("#logwindow").append("<br/>Collecting documents from wikipedia..<br/>");
-    Wiki.crawl_wikipedia([$("#center_article").val()], 25, function() {
-      // When finished crawling wikipedia
-      $("#logwindow").append("Finished collecting " + Articles.all.length + " documents.<br/>");
-      setTimeout(function(){
-        Wiki.get_histograms([
-          new Stat("Builtin Object", new WallClockBenchmark(BuiltinMap), 800, 51200),
-          new Stat("Unbalanced Binary Search Tree", new WallClockBenchmark(UnbalancedBSTMap), 800, 51200),
-          new Stat("Hashtable", new WallClockBenchmark(HashtableMap), 800, 51200),
-          new Stat("Sorted Array", new WallClockBenchmark(SortedArrayMap), 800, 51200),
-          new Stat("n^2", new SyntheticBenchmark(function(n) {return 0.0000005 * n * n;}), 800, 51200),
-          new Stat("n log2 n", new SyntheticBenchmark(function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);}), 800, 51200),
-          new Stat("n", new SyntheticBenchmark(function(n) {return 0.0005 * n;}), 800, 51200),
-        ]); // get_histograms()
-      }, 0); // setTimeout()
-    }); // crawl_wikipedia()
+    Wiki.crawl_wikipedia([$("#center_article").val()], 25);
   }, // init()
 
   /** Crawl up to `limit` pages of Wikipedia articles, starting at `names`.
@@ -40,10 +26,23 @@ Wiki = {
           Wiki.crawl_wikipedia(next_names.slice(0, limit), limit, done);
         }, 0); 
       } else {
-        done();
+        $("#logwindow").append("Finished collecting " + Articles.all.length + " documents.<br/>");
+        setTimeout(Wiki.init_histograms, 0);
       }
     }); // Articles.fetch
   }, // crawl_wikipedia
+  
+  init_histograms: function(){
+      Wiki.get_histograms([
+          new Stat("Builtin Object", new InsertionBenchmark(BuiltinMap), 800, 51200),
+          new Stat("Unbalanced Binary Search Tree", new InsertionBenchmark(UnbalancedBSTMap), 800, 51200),
+          new Stat("Hashtable", new InsertionBenchmark(HashtableMap), 800, 51200),
+          new Stat("Sorted Array", new InsertionBenchmark(SortedArrayMap), 800, 51200),
+          new Stat("n^2", new SyntheticBenchmark(function(n) {return 0.0005 * n * n;}), 800, 51200),
+          new Stat("n log2 n", new SyntheticBenchmark(function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);}), 800, 51200),
+          new Stat("n", new SyntheticBenchmark(function(n) {return 0.0005 * n;}), 800, 51200),
+        ]);
+  },
 
 
   /** Rerun a performance test against a queue of datasets
@@ -75,6 +74,7 @@ Wiki = {
       // Finish this group and test a new benchmark
       q.shift();
       setTimeout(function(){ Wiki.get_histograms(q) }, 0);
+      setTimeout(Stats.display, 0);
     } else {
       // Display the results
       setTimeout(Stats.display, 0);

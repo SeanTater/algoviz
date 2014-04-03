@@ -19,7 +19,7 @@ Stats = {
     });
     
     new Highcharts.Chart({
-      chart: {renderTo: "time_chart"},
+      chart: {renderTo: "time_chart", zoomType: "xy"},
       title: {text: "Runtime by Set Size"},
       xAxis: {
         title: {text: "words"},
@@ -32,7 +32,7 @@ Stats = {
       series: all_runtimes
     });
     new Highcharts.Chart({
-      chart: {renderTo: "cost_chart"},
+      chart: {renderTo: "cost_chart", zoomType: "xy"},
       title: {text: "Cost per Lookup by Set Size"},
       xAxis: {
         title: {text: "words"},
