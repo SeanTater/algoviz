@@ -1,6 +1,5 @@
 /**
- * SearchBenchmark gives calculated benchmark results for reference
- * The point is to give a line on the chart for comparison
+ * SearchBenchmark searches for tokens in a prepopulated structure
  * 
  * interface Benchmark {
  *     Structure subject
@@ -12,7 +11,6 @@
 function SearchBenchmark(subject) {
     this.subject = subject;
     this.subject_name = subject.name;
-    this._equation = equation;
 }
 
 SearchBenchmark.prototype.run = function(count) {
@@ -22,5 +20,5 @@ SearchBenchmark.prototype.run = function(count) {
     for (var i=0; i<3; i++) {
         subject.searchAll(tokens);
     }
-    return (start - new Date();
+    return (start - new Date());
 }

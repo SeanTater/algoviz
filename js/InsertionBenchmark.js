@@ -1,6 +1,5 @@
 /**
- * InsertionBenchmark gives calculated benchmark results for reference
- * The point is to give a line on the chart for comparison
+ * InsertionBenchmark inserts tokens into an empty structure
  * 
  * interface Benchmark {
  *     Structure subject
@@ -12,7 +11,6 @@
 function InsertionBenchmark(subject) {
     this.subject = subject;
     this.subject_name = subject.name;
-    this._equation = equation;
 }
 
 InsertionBenchmark.prototype.run = function(count) {
@@ -21,5 +19,5 @@ InsertionBenchmark.prototype.run = function(count) {
     for (var i=0; i<3; i++) {
         new this.subject().populate(tokens);
     }
-    return (start - new Date();
+    return (start - new Date());
 }
