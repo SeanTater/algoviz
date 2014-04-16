@@ -9,6 +9,12 @@ SortedArrayMap.prototype.populate = function(tokens) {
   tokens.forEach(this.count, this);
 };
 
+SortedArrayMap.prototype.searchAll = function(tokens) {
+  tokens.forEach(function(key){
+      _.sortedIndex(this.keys, key);
+  }, this);
+};
+
 SortedArrayMap.prototype.count = function(key) {
   // >> implies integer, / implies double. We want an int.
   /**var index = entries.length >> 1;

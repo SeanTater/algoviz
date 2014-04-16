@@ -1,7 +1,7 @@
 <html ng-app>
   <head>
+    <link rel="stylesheet" href="wikiperf.css" type="text/css" />
     <script src="js/jquery.min.js"></script>
-    <script src="js/Chart.min.js"></script>
     <script src="js/highcharts.js"></script>
     <script src="js/underscore.js"></script>
     <script src="js/buckets.js"></script>
@@ -14,12 +14,13 @@
     <script src="js/BuiltinMap.js"></script>
     
     <script src="js/InsertionBenchmark.js"></script>
+    <script src="js/SearchBenchmark.js"></script>
     <script src="js/SyntheticBenchmark.js"></script>
     
     <script src="js/Stat.js"></script>
+    <script src="js/Chart.js"></script>
     <script src="js/Article.js"></script>
     <script src="js/Wiki.js"></script>
-    <link rel="stylesheet" href="wikiperf.css" type="text/css" />
   </head>
   <body>
     <header id='controls'>
@@ -32,9 +33,11 @@
     </header>
     <div class="split_panels">
       <div class="panel pane" id="articles">
-        <strong>Article Neighborhood</strong>
-        <table id="article_neighborhood">
-        </table>
+        <strong>Benchmark Settings</strong>
+        <form id="benchmark_settings">
+            <input type="checkbox" name="sb on hm" value="sb on hm" checked="true" />
+            <label for="sb on hm">SearchBenchmark on HashtableMap</label>
+        </form>
       </div>
       <div class="panel pane" id='results'>
         Common terms surrounding {{center_article}}
@@ -42,8 +45,18 @@
         </table>
       </div>
       <div class="panel pane" id="performance">
-        <div id="time_chart" class='chart'></div>
-        <div id="cost_chart" class='chart'></div>
+        Search
+        <div id="search_time_chart" class='chart'></div>
+        <div id="search_cost_chart" class='chart'></div>
+        
+        <br />
+        Insertion
+        <div id="insertion_time_chart" class='chart'></div>
+        <div id="insertion_cost_chart" class='chart'></div>
+        
+        Deletion
+        <div id="deletion_time_chart" class='chart'></div>
+        <div id="deletion_cost_chart" class='chart'></div>
       </div>
       <div class="panel pane">
         This framework is designed to help you visualize the performance of

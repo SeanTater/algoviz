@@ -1,7 +1,13 @@
 function BuiltinMap() {
-  // Use a builtin object
-  this.hist = {}
+    // Use a builtin object
+    this.hist = {}
 }
+
+BuiltinMap.prototype.searchAll = function(tokens) {
+    tokens.forEach(function(token){
+        this.hist[token];
+    }, this);
+};
 
 BuiltinMap.prototype.populate = function(tokens) {
   tokens.forEach(function(token){

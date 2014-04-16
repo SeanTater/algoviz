@@ -17,3 +17,9 @@ UnbalancedBSTMap.prototype.populate = function(tokens) {
     }
   }, this);
 };
+
+UnbalancedBSTMap.prototype.searchAll = function(tokens) {
+  tokens.forEach(function(token){
+    this.tree.searchNode(this.tree.root, token);
+  }, this);
+};
