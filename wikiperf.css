@@ -1,41 +1,35 @@
-#article_neighborhood {
-  max-width: 200px;
-  max-height: 800px;
-  font-size: 2pt;
-}
-
 .chart {
     display: inline-block;
 }
 
 #controls {
-  font-family: sans-serif;
-  font-size: large;
-  background: #bcf;
-  padding: 1em;
-  box-shadow: 2px 2px 3px gray, 0 0 3px white inset;
-}
+    font-family: sans-serif;
+    font-size: large;
+    background: #bcf;
+    padding: 1em;
+    box-shadow: 2px 2px 3px gray, 0 0 3px white inset;
+    }
 
 #logwindow {
-  color: #555;
-  padding: 1em;
+    color: #555;
+    padding: 1em;
 }
 
 .panel {
-  -webkit-flex: auto;
-  flex: auto;
-  padding: 1em;
-  margin: 1em;
+    -webkit-flex: auto;
+    flex: auto;
+    padding: 1em;
+    margin: 1em;
 }
 
 .pane {
-  background: #eee;
-  box-shadow: 0 0 2px gray;
+    background: #eee;
+    box-shadow: 0 0 2px gray;
 }
 
 .split_panels {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: flow;
-  flex-direction: flow;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: flow;
+    flex-direction: flow;
 }
