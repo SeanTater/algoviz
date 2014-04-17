@@ -19,7 +19,33 @@ UnbalancedBSTMap.prototype.populate = function(tokens) {
 };
 
 UnbalancedBSTMap.prototype.searchAll = function(tokens) {
-  tokens.forEach(function(token){
-    this.tree.searchNode(this.tree.root, token);
+  return tokens.map(function(token){
+    return this.tree.searchNode(this.tree.root, token).element;
   }, this);
+};
+
+/**
+ * Delete many keys from the map at once.
+ * This can be more efficient than iterating.
+ * @param keys:Array<String>. Keys to delete
+ * @returns Array<boolean>. Whether each key was deleted
+ */
+// TODO: Don't iterate.
+UnbalancedBSTMap.prototype.deleteBulk = function(keys) {
+    return keys.map(this.delete, this);
+};
+
+/**
+ * Delete a key from the map.
+ * @param key:String. The key to remove
+ * @returns  boolean. Whether a key was removed
+ */
+UnbalancedBSTMap.prototype.delete = function(key) {
+    var node = this.tree.searchNode(this.tree.root, key);
+    if (node.element === element) {
+        this.tree.removeNode(node);
+        return true;
+    } else {
+        return false;
+    }
 };

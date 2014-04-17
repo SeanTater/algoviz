@@ -11,15 +11,32 @@ HashtableMap.prototype.populate =  function(tokens) {
 };
 
 HashtableMap.prototype.searchAll = function(tokens) {
-    tokens.forEach(function(key) {
-        var hash = Math.abs(MurmurHash3.hashString(key, key.length, 0) | 0) % this.size;
-        this.table[hash];
+    return tokens.map(function(key) {
+        return this.table[this._getIndex(key)];
     }, this);
 };
 
+HashtableMap.prototype._getIndex = function(key) {
+    return Math.abs(MurmurHash3.hashString(key, key.length, 0) | 0) % this.size;
+};
+
+HashtableMap.prototype.deleteBulk = function(keys) {
+    tokens.map(this.delete, this);
+};
+
+HashtableMap.prototype.delete = function(key) {
+    var entry = this.table[this._getIndex(key)];
+    var key_index = entry.indexOf(key)
+    if (key_index >= 0) {
+        entry.splice(key_index, 1);
+        return true;
+    } else {
+        return false;
+    }
+};
+
 HashtableMap.prototype.count = function(key, value) {
-    var hash = Math.abs(MurmurHash3.hashString(key, key.length, 0) | 0) % this.size;
-    var entry = this.table[hash];
+    var entry = this.table[this._getIndex(key)];
     value |= 1;
     if (entry !== undefined) {
         if (entry[key] !== undefined) {

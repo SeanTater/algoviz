@@ -28,7 +28,7 @@ BuiltinMap.prototype.populate = function(tokens) {
 };
 
 BuiltinMap.prototype.deleteBulk = function(keys) {
-    tokens.forEach(this.delete, this);
+    return tokens.map(this.delete, this);
 };
 
 BuiltinMap.prototype.delete = function(key) {
