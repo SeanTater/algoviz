@@ -42,7 +42,7 @@ UnbalancedBSTMap.prototype.deleteBulk = function(keys) {
  */
 UnbalancedBSTMap.prototype.delete = function(key) {
     var node = this.tree.searchNode(this.tree.root, key);
-    if (node.element === element) {
+    if (node.element === key) {
         this.tree.removeNode(node);
         return true;
     } else {

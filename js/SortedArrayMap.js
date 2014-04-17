@@ -32,7 +32,7 @@ SortedArrayMap.prototype.populate = function(tokens) {
 //TODO: Search in order, use a linear search maybe?
 SortedArrayMap.prototype.searchAll = function(keys) {
     return keys.map(function(key){
-        return this._values[_.sortedIndex(this.keys, key)];
+        return this._values[_.sortedIndex(this._keys, key)];
     }, this);
 };
 
@@ -53,7 +53,7 @@ SortedArrayMap.prototype.deleteBulk = function(keys) {
  * @returns  boolean. Whether a key was removed
  */
 SortedArrayMap.prototype.delete = function(key) {
-    var index = _.sortedIndex(this.keys, key);
+    var index = _.sortedIndex(this._keys, key);
     if (this._keys[index] === key) {
         this._keys.splice(index, 1);
         this._values.splice(index, 1);
@@ -81,7 +81,7 @@ SortedArrayMap.prototype.count = function(key) {
      *  step >>= 1;
 }
 **/
-    var index = _.sortedIndex(this.keys, key);
+    var index = _.sortedIndex(this._keys, key);
     if (this._keys[index] === key) {
         this._values[index]++;
     } else {

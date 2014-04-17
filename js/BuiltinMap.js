@@ -13,29 +13,26 @@ BuiltinMap.prototype.populate = function(tokens) {
   tokens.forEach(function(token){
     this._store[token] = (this._store[token] | 0) + 1;
   }, this)
-
-  // TODO: This unfairly skews the results for builtin
-  var entries = [];
-  for (var word in this.hist) {
-    entries.push({word: word, count: this.hist[word]});
-  }
-  entries.sort(function(a, b){ return b.count - a.count });
-  entries = entries.slice(0, 25);
-  $("#histogram").empty();
-  entries.forEach(function(entry) {
-    $("#histogram").append("<tr><td>"+entry.word+"</td><td>"+entry.count+"</td></tr>");
-  });
 };
 
 BuiltinMap.prototype.deleteBulk = function(keys) {
-    return tokens.map(this.delete, this);
+    return keys.map(this.delete, this);
 };
 
 BuiltinMap.prototype.delete = function(key) {
     if (key in this._store) {
-        delete this._store[token];
+        delete this._store[key];
         return true;
     } else {
         return false;
     }
 };
+
+BuiltinMap.prototype.top = function(n) {
+    var entries = [];
+    for (var word in this._store) {
+        entries.push({word: word, count: this._store[word]});
+    }
+    entries.sort(function(a, b){ return b.count - a.count });
+    return entries.slice(0, n);
+}

@@ -29,6 +29,14 @@ Wiki = {
     }, // crawl_wikipedia
 
     init_histograms: function(){
+        // Find the actual results, using the builtin.
+        var map = new BuiltinMap();
+        map.populate(Articles.all_tokens.slice(0, 100000));
+        $("#histogram").empty();
+        map.top(25).forEach(function(entry) {
+            $("#histogram").append("<tr><td>"+entry.word+"</td><td>"+entry.count+"</td></tr>");
+        });
+        
         Wiki.current_chart = new Chart("Search");
         Wiki.get_histograms(Wiki.available_histograms);
     },
@@ -133,4 +141,6 @@ Wiki = {
 
 $(function(){
     $("#get_histograms").click(Wiki.init);
+    // From JQueryUI, used on the charts
+    $(".tabs").tabs();
 });

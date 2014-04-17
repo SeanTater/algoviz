@@ -1,6 +1,6 @@
 function HashtableMap() {
     // Create a new hash table that counts strings
-    this.table = [];
+    this.table = []; // Array<Object>
     this.size = 16;
     this.entries = 0;
 }
@@ -21,14 +21,13 @@ HashtableMap.prototype._getIndex = function(key) {
 };
 
 HashtableMap.prototype.deleteBulk = function(keys) {
-    tokens.map(this.delete, this);
+    keys.map(this.delete, this);
 };
 
 HashtableMap.prototype.delete = function(key) {
     var entry = this.table[this._getIndex(key)];
-    var key_index = entry.indexOf(key)
-    if (key_index >= 0) {
-        entry.splice(key_index, 1);
+    if (key in entry) {
+        delete entry[key];
         return true;
     } else {
         return false;
@@ -36,7 +35,8 @@ HashtableMap.prototype.delete = function(key) {
 };
 
 HashtableMap.prototype.count = function(key, value) {
-    var entry = this.table[this._getIndex(key)];
+    var hash = this._getIndex(key)
+    var entry = this.table[hash];
     value |= 1;
     if (entry !== undefined) {
         if (entry[key] !== undefined) {

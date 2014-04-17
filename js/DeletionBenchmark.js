@@ -14,7 +14,7 @@ function DeletionBenchmark(subject) {
     this.subject_name = subject.name;
 }
 
-InsertionBenchmark.prototype.run = function(count) {
+DeletionBenchmark.prototype.run = function(count) {
     // TODO: Maybe we should not triple the memory requirements?
     var tokens = Articles.all_tokens.slice(0, count);
     var subjects = [];
