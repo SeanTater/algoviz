@@ -1,17 +1,17 @@
 function BuiltinMap() {
     // Use a builtin object
-    this.hist = {}
+    this._store = {}
 }
 
 BuiltinMap.prototype.searchAll = function(tokens) {
     tokens.forEach(function(token){
-        this.hist[token];
+        this._store[token];
     }, this);
 };
 
 BuiltinMap.prototype.populate = function(tokens) {
   tokens.forEach(function(token){
-    this.hist[token] = (this.hist[token] | 0) + 1;
+    this._store[token] = (this._store[token] | 0) + 1;
   }, this)
 
   // TODO: This unfairly skews the results for builtin
@@ -25,4 +25,17 @@ BuiltinMap.prototype.populate = function(tokens) {
   entries.forEach(function(entry) {
     $("#histogram").append("<tr><td>"+entry.word+"</td><td>"+entry.count+"</td></tr>");
   });
+};
+
+BuiltinMap.prototype.deleteBulk = function(keys) {
+    tokens.forEach(this.delete, this);
+};
+
+BuiltinMap.prototype.delete = function(key) {
+    if (key in this._store) {
+        delete this._store[token];
+        return true;
+    } else {
+        return false;
+    }
 };
