@@ -9,9 +9,9 @@
  *     float function(int count)
  * }
  */
-function SyntheticBenchmark(equation) {
+function SyntheticBenchmark(name, equation) {
     this.subject = null;
-    this.subject_name = equation.toString();
+    this.subject_name = name;
     this._equation = equation;
 }
 

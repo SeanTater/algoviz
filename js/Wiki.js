@@ -104,9 +104,8 @@ Wiki = {
                     new Stat("Unbalanced Binary Search Tree", new SearchBenchmark(UnbalancedBSTMap)),
                     new Stat("Hashtable", new SearchBenchmark(HashtableMap)),
                     new Stat("Sorted Array", new SearchBenchmark(SortedArrayMap)),
-                    //new Stat("n^2", new SyntheticBenchmark(function(n) {return 0.0005 * n * n;})),
-                    new Stat("n log2 n", new SyntheticBenchmark(function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);})),
-                    new Stat("n", new SyntheticBenchmark(function(n) {return 0.0005 * n;})),
+                    new Stat("n log2 n", new SyntheticBenchmark("n log2 n", function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);})),
+                    new Stat("n", new SyntheticBenchmark("n", function(n) {return 0.0005 * n;})),
                 ]
             }, {
                 name: "Insertion",
@@ -115,9 +114,18 @@ Wiki = {
                     new Stat("Unbalanced Binary Search Tree", new InsertionBenchmark(UnbalancedBSTMap)),
                     new Stat("Hashtable", new InsertionBenchmark(HashtableMap)),
                     new Stat("Sorted Array", new InsertionBenchmark(SortedArrayMap)),
-                    //new Stat("n^2", new SyntheticBenchmark(function(n) {return 0.0005 * n * n;}), 800, 51200),
-                    new Stat("n log2 n", new SyntheticBenchmark(function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);})),
-                    new Stat("n", new SyntheticBenchmark(function(n) {return 0.0005 * n;})),
+                    new Stat("n log2 n", new SyntheticBenchmark("n log2 n", function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);})),
+                    new Stat("n", new SyntheticBenchmark("n", function(n) {return 0.0005 * n;})),
+                ]
+            }, {
+                name: "Deletion",
+                runs: [
+                    new Stat("Builtin Object", new DeletionBenchmark(BuiltinMap)),
+                    new Stat("Unbalanced Binary Search Tree", new DeletionBenchmark(UnbalancedBSTMap)),
+                    new Stat("Hashtable", new DeletionBenchmark(HashtableMap)),
+                    new Stat("Sorted Array", new DeletionBenchmark(SortedArrayMap)),
+                    new Stat("n log2 n", new SyntheticBenchmark("n log2 n", function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);})),
+                    new Stat("n", new SyntheticBenchmark("n", function(n) {return 0.0005 * n;})),
                 ]
             }
         ]
