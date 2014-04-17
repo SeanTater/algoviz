@@ -14,11 +14,12 @@ function SearchBenchmark(subject) {
 }
 
 SearchBenchmark.prototype.run = function(count) {
-    var tokens = Article.all_tokens.slice(0, count);
-    var subject = new this.subject().populate(tokens);
+    var tokens = Articles.all_tokens.slice(0, count);
+    var subject = new this.subject()
+    subject.populate(tokens);
     var start = new Date();
     for (var i=0; i<3; i++) {
         subject.searchAll(tokens);
     }
-    return (start - new Date());
+    return new Date() - start;
 }

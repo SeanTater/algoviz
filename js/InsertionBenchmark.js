@@ -14,10 +14,10 @@ function InsertionBenchmark(subject) {
 }
 
 InsertionBenchmark.prototype.run = function(count) {
-    var tokens = Article.all_tokens.slice(0, count);
+    var tokens = Articles.all_tokens.slice(0, count);
     var start = new Date();
     for (var i=0; i<3; i++) {
         new this.subject().populate(tokens);
     }
-    return (start - new Date());
+    return new Date() - start;
 }

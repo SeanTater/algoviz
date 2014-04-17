@@ -30,9 +30,8 @@ Wiki = {
 
     init_histograms: function(){
         Wiki.current_chart = new Chart("Search");
-        Wiki.get_histograms(available_histograms);
+        Wiki.get_histograms(Wiki.available_histograms);
     },
-
 
     /** Rerun a performance test against a queue of datasets
     * Each dataset is run 3 times and averaged
@@ -96,7 +95,6 @@ Wiki = {
             setTimeout(Wiki.current_chart.display.bind(Wiki.current_chart), 0);
         }
     },
-    
     
     available_histograms: [
             {
