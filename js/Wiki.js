@@ -31,7 +31,7 @@ Wiki = {
     init_histograms: function(){
         // Find the actual results, using the builtin.
         var map = new BuiltinMap();
-        map.populate(Articles.all_tokens.slice(0, 100000));
+        map.populate(Articles.all_tokens.slice(0, 250000));
         $("#histogram").empty();
         map.top(25).forEach(function(entry) {
             $("#histogram").append("<tr><td>"+entry.word+"</td><td>"+entry.count+"</td></tr>");
@@ -81,7 +81,7 @@ Wiki = {
         // What to do after this function?
         if (e.count < Math.min(e.cap, Articles.all_tokens.length)) {
             // Spawn another test
-            e.count *= 2;
+            e.count += 10000;
             setTimeout(function(){ Wiki.get_histograms(charts) }, 0);
         } else if (runs.length > 1) {
             // Finish this group and test a new benchmark

@@ -27,7 +27,7 @@ Chart.prototype.display = function() {
       xAxis: {
         title: {text: "words"},
         labels: {
-          formatter: function(){return "" + (800 << this.value);},
+          formatter: function(){return "" + (10000 * (this.value + 1));},
           step: 1
         }
       },
@@ -40,7 +40,7 @@ Chart.prototype.display = function() {
       xAxis: {
         title: {text: "words"},
         labels: {
-          formatter: function(){return "" + (800 << this.value);},
+          formatter: function(){return "" + (10000 * (this.value + 1));},
           step: 1
         }
       },

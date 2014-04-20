@@ -1,8 +1,8 @@
 function Stat(name, benchmark) {
    this.name = name;
    this.benchmark = benchmark;
-   this.count = 800;
-   this.cap = 150000;
+   this.count = 10000;
+   this.cap = 250000;
    this.runtimes = [];
    this.costs = [];
    
