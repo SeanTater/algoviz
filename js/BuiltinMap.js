@@ -16,11 +16,9 @@ BuiltinMap.prototype.get = function(key) {
  * Set the value associated with key in the map
  * @param key:String. Key
  * @param value:int
- * @returns integer
  */
 BuiltinMap.prototype.put = function(key, value) {
     this._store[key] = value;
-    return true;
 };
 
 /**

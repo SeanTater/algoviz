@@ -13,10 +13,11 @@ function MixedBenchmark(subject) {
     this.subject_name = subject.name;
 }
 
-InsertionBenchmark.prototype.run = function(count) {
+MixedBenchmark.prototype.run = function(count) {
     var tokens = Articles.all_tokens.slice(0, count);
     // NOTE: Should we fill this first or not?
-    var target = this.subject.populate();
+    var target = new this.subject();
+    target.populate(tokens);
     var search_insert = $("#mixed_search_percent").val() | 0;
     var insert_delete = search_insert + ($("#mixed_insert_percent").val() | 0);
     var delete_end = insert_delete + ($("#mixed_delete_percent").val() | 0);

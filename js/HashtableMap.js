@@ -7,7 +7,9 @@ function HashtableMap() {
 
   
 HashtableMap.prototype.populate =  function(tokens) {
-    tokens.forEach(this.count, this);
+    tokens.forEach(function(token){
+        this.put(token, this.get(token)+1);
+    }, this);
 };
 
 HashtableMap.prototype.searchAll = function(tokens) {
@@ -24,6 +26,11 @@ HashtableMap.prototype.deleteBulk = function(keys) {
     keys.map(this.delete, this);
 };
 
+/**
+ * Delete a key from the map.
+ * @param key:String. The key to remove
+ * @returns  boolean. Whether a key was removed
+ */
 HashtableMap.prototype.delete = function(key) {
     var entry = this.table[this._getIndex(key)];
     if (key in entry) {
@@ -34,25 +41,24 @@ HashtableMap.prototype.delete = function(key) {
     }
 };
 
-HashtableMap.prototype.count = function(key, value) {
+/** 
+ * Set the value associated with key in the map
+ * @param key:String. Key
+ * @param value:int
+ */
+HashtableMap.prototype.put = function(key, value) {
     var hash = this._getIndex(key)
     var entry = this.table[hash];
     value |= 1;
-    if (entry !== undefined) {
-        if (entry[key] !== undefined) {
-            // Already counted before
-            entry[key] += value;
-        } else {
-            // Hash collision on this key
-            entry[key] = value;
-        }
-    } else {
+    if (entry === undefined) {
         // First instance of this key
         entry = this.table[hash] = {};
         entry[key] = value;
         this.entries++;
         
         if (this.entries > 0.75 * this.size) this.rehash();
+    } else {
+        entry[key] = value;
     }
 };
 
@@ -65,8 +71,22 @@ HashtableMap.prototype.rehash = function(){
     old_table.forEach(function(bucket){
         if (bucket !== undefined) {
             for (var key in bucket) {
-                this.count(key, bucket[key]);
+                this.put(key, bucket[key]);
             }
         }
     }, this);
+};
+
+/** 
+ * Get the value associated with key from the map
+ * @param key:String. Key
+ * @returns integer
+ */
+HashtableMap.prototype.get = function(key){
+    var ent_dict = this.table[this._getIndex(key)];
+    if (ent_dict === undefined || ent_dict[key] === undefined) {
+        return 0;
+    } else {
+        return ent_dict[key];
+    }
 };

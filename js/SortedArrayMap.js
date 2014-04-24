@@ -6,7 +6,7 @@
  *     Array<boolean> function deleteBulk(Array<String> keys)
  *     int get(String key)
  *     undefined function populate(Array<String> keys)
- *     undefined put(String key)
+ *     undefined put(String key, int value)
  *     Array<int> function searchAll(Array<String> keys)
  * }
  */
@@ -76,7 +76,13 @@ SortedArrayMap.prototype.deleteBulk = function(keys) {
  * @returns integer
  */
 SortedArrayMap.prototype.get = function(key){
-    return this._values[_.sortedIndex(this._keys, key)];
+    var index = _.sortedIndex(this._keys, key);
+    var closest_key = this._keys[index];
+    if (closest_key === key) {
+        return this._values[index];
+    } else {
+        return 0;
+    }
 };
 
 /** 
@@ -85,8 +91,15 @@ SortedArrayMap.prototype.get = function(key){
  * @param value:int
  * @returns integer
  */
-SortedArrayMap.prototype.set = function(key, value){
-    this._values[_.sortedIndex(this._keys, key)] = value;
+SortedArrayMap.prototype.put = function(key, value){
+    var index = _.sortedIndex(this._keys, key);
+    var closest_key = this._keys[index];
+    if (closest_key === key) {
+        this._values[index] = value;
+    } else {
+        this._keys.splice(index, 0, key);
+        this._values.splice(index, 0, 1);
+    }
 };
 
 /**
@@ -107,5 +120,5 @@ SortedArrayMap.prototype.populate = function(tokens) {
  */
 //TODO: Search in order, use a linear search maybe?
 SortedArrayMap.prototype.searchAll = function(keys) {
-    return keys.map(get, this);
+    return keys.map(this.get, this);
 };

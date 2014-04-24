@@ -135,6 +135,16 @@ Wiki = {
                     new Stat("n log2 n", new SyntheticBenchmark("n log2 n", function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);})),
                     new Stat("n", new SyntheticBenchmark("n", function(n) {return 0.0005 * n;})),
                 ]
+            },{
+                name: "Mixed",
+                runs: [
+                    new Stat("Builtin Object", new MixedBenchmark(BuiltinMap)),
+                    new Stat("Unbalanced Binary Search Tree", new MixedBenchmark(UnbalancedBSTMap)),
+                    new Stat("Hashtable", new MixedBenchmark(HashtableMap)),
+                    new Stat("Sorted Array", new MixedBenchmark(SortedArrayMap)),
+                    new Stat("n log2 n", new SyntheticBenchmark("n log2 n", function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);})),
+                    new Stat("n", new SyntheticBenchmark("n", function(n) {return 0.0005 * n;})),
+                ]
             }
         ]
 };

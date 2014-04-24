@@ -20,6 +20,7 @@
         <script src="js/InsertionBenchmark.js"></script>
         <script src="js/SearchBenchmark.js"></script>
         <script src="js/DeletionBenchmark.js"></script>
+        <script src="js/MixedBenchmark.js"></script>
         <script src="js/SyntheticBenchmark.js"></script>
         
         <script src="js/Stat.js"></script>
@@ -33,7 +34,8 @@
         <form>
             <label>
                 Performance Analysis <br />
-                <input id="center_article" type="text" ng-model="center_article"
+                <input id="center_article" type="text" size="50"
+                    ng-model="center_article"
                     placeholder="Enter a Wikipedia article title" />
             </label>
             <button id="get_histograms">Calculate</button>
@@ -89,17 +91,17 @@
                 </p>
                 <ul>
                     <li>
-                        <label> {{mixed_search_percent}}% searches
+                        <label> {{mixed_search_percent}}  searches
                             <input id="mixed_search_percent" type="range" ng-model="mixed_search_percent" value="60" />
                         </label>
                     </li>
                     <li>
-                        <label> {{mixed_insert_percent}}% inserts
+                        <label> {{mixed_insert_percent}} inserts
                             <input id="mixed_insert_percent" type="range" ng-model="mixed_insert_percent" value="35" />
                         </label>
                     </li>
                     <li>
-                        <label> {{mixed_delete_percent}}% deletes
+                        <label> {{mixed_delete_percent}} deletes
                             <input id="mixed_delete_percent" type="range" ng-model="mixed_delete_percent" value="10" />
                         </label>
                     </li>
@@ -113,7 +115,7 @@
                 </table>
             </div>
         </div>
-        <div class="panel pane">
+        <div class="panel pane" id="aboutus">
             This framework is designed to help you visualize the performance of
             various algorithms in a convenient setting.
             <br />

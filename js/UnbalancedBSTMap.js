@@ -18,6 +18,13 @@ UnbalancedBSTMap.prototype.populate = function(tokens) {
   }, this);
 };
 
+/**
+ * Search for many keys at once.
+ * This can be more efficient than iterating.
+ *
+ * @param keys:Array<String>. Keys to search for
+ * @returns Array<int>. Counts of each key
+ */
 UnbalancedBSTMap.prototype.searchAll = function(tokens) {
   return tokens.map(function(token){
     return this.tree.searchNode(this.tree.root, token).element;
@@ -42,10 +49,39 @@ UnbalancedBSTMap.prototype.deleteBulk = function(keys) {
  */
 UnbalancedBSTMap.prototype.delete = function(key) {
     var node = this.tree.searchNode(this.tree.root, key);
-    if (node.element === key) {
+    if (node !== null && node.element.token === key) {
         this.tree.removeNode(node);
         return true;
     } else {
         return false;
+    }
+};
+
+/** 
+ * Get the value associated with key from the map
+ * @param key:String. Key
+ * @returns integer
+ */
+UnbalancedBSTMap.prototype.get = function(key){
+    var node = this.tree.searchNode(this.tree.root, key);
+    if (node.element.token === key) {
+        return node.element.count;
+    } else {
+        return 0;
+    }
+};
+
+/** 
+ * Set the value associated with key in the map
+ * @param key:String. Key
+ * @param value:int
+ * @returns integer
+ */
+UnbalancedBSTMap.prototype.put = function(key, value){
+    var node = this.tree.searchNode(this.tree.root, key);
+    if (node.element.token === key) {
+        node.element.count = value;
+    } else {
+        this.tree.add({token: key, count: value});
     }
 };
