@@ -85,6 +85,23 @@ SortedArrayMap.prototype.get = function(key){
     }
 };
 
+/**
+ * Procedure for insertion into an array, shifting the remaining elements
+ * (e.g. array[index] = value) when the precedure is complete.
+ * 
+ * This procedure is intentially unoptimized, not using splice(). This is to
+ * give a fairer comparison of speed.
+ * @param array:Array. The array to insert into
+ * @param index:int. Insert the new element before this index.
+ * @param value:any. The new element to insert
+ */
+SortedArrayMap.prototype.insert = function(array, index, value) {
+    for (var i=array.length; i>index; i--) {
+        array[i] = array[i-1];
+    }
+    array[index] = value;
+}
+
 /** 
  * Set the value associated with key in the map
  * @param key:String. Key
@@ -97,8 +114,8 @@ SortedArrayMap.prototype.put = function(key, value){
     if (closest_key === key) {
         this._values[index] = value;
     } else {
-        this._keys.splice(index, 0, key);
-        this._values.splice(index, 0, 1);
+        this.insert(this._keys, index, key);
+        this.insert(this._values, index, value);
     }
 };
 

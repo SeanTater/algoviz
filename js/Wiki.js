@@ -31,7 +31,7 @@ Wiki = {
     init_histograms: function(){
         // Find the actual results, using the builtin.
         var map = new BuiltinMap();
-        map.populate(Articles.all_tokens.slice(0, 250000));
+        map.populate(Articles.all_tokens.slice(0, 1000000));
         $("#histogram").empty();
         map.top(25).forEach(function(entry) {
             $("#histogram").append("<tr><td>"+entry.word+"</td><td>"+entry.count+"</td></tr>");
@@ -112,7 +112,7 @@ Wiki = {
                     new Stat("Unbalanced Binary Search Tree", new SearchBenchmark(UnbalancedBSTMap)),
                     new Stat("Hashtable", new SearchBenchmark(HashtableMap)),
                     new Stat("Sorted Array", new SearchBenchmark(SortedArrayMap)),
-                    new Stat("n log2 n", new SyntheticBenchmark("n log2 n", function(n) {return 0.0005 * n * Math.log(n) / Math.log(2);})),
+                    new Stat("n log2 n", new SyntheticBenchmark("n log2 n", function(n) {return 0.00001 * n * Math.log(n) / Math.log(2);})),
                     new Stat("n", new SyntheticBenchmark("n", function(n) {return 0.0005 * n;})),
                 ]
             }, {
